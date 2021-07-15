@@ -38,3 +38,9 @@ const handleMinus = () => {
 
 add.addEventListener("click", handleAdd);
 minus.addEventListener("click", handleMinus);
+
+/*
+  <button id="add">Add</button>
+    <span></span>
+  <button id="minus">Minus</button>
+ */
