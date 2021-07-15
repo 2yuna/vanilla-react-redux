@@ -7,6 +7,9 @@ const ul = document.querySelector("ul");
 const ADD_TODO = "ADD_TODO";
 const DELETE_TODO = "DELETE_TODO";
 
+// ===========================================================================
+// Action Creators
+// ===========================================================================
 const addToDo = (text) => {
   return { type: ADD_TODO, text };
 };
@@ -15,20 +18,32 @@ const deleteToDo = (id) => {
   return { type: DELETE_TODO, id };
 };
 
+// ===========================================================================
+// Reducer
+// ===========================================================================
 const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [{ text: action.text, id: Date.now() }, ...state];
+      const newToDoObj = { text: action.text, id: Date.now() };
+      return [newToDoObj, ...state];
     case DELETE_TODO:
-      return state.filter((toDo) => toDo.id !== action.id);
+      const cleaned = state.filter((toDo) => toDo.id !== action.id);
+      return cleaned;
     default:
       return state;
   }
 };
 
-const store = createStore(reducer);
+// ===========================================================================
+// Store
+// ===========================================================================
 
+const store = createStore(reducer);
 store.subscribe(() => console.log(store.getState()));
+
+// ===========================================================================
+// Dispatch
+// ===========================================================================
 
 const dispatchAddToDo = (text) => {
   store.dispatch(addToDo(text));
@@ -39,6 +54,9 @@ const dispatchDeleteToDo = (e) => {
   store.dispatch(deleteToDo(id));
 };
 
+// ===========================================================================
+// Function
+// ===========================================================================
 const paintToDos = () => {
   ul.innerHTML = "";
 
